@@ -1,0 +1,5 @@
+
+###
+#  summary: get player
+###
+POST     /body                controllers.TestController.bodyAction

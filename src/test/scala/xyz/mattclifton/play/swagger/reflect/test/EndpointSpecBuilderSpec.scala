@@ -13,16 +13,22 @@ class EndpointSpecBuilderSpec extends Specification {
     lazy val pathJson = json \ "paths"
     lazy val definitionsJson = json \ "definitions"
     lazy val postBodyJson = (pathJson \ "/body" \ "post").as[JsObject]
+    lazy val postNoBodyJson = (pathJson \ "/noBody" \ "post").as[JsObject]
 
-    def parametersOf(json: JsValue): Seq[JsValue] = {
-      (json \ "parameters").as[JsArray].value
+    def parametersOf(json: JsValue): Option[JsArray] = {
+      (json \ "parameters").asOpt[JsArray]
     }
 
     "generate body parameter with in " >> {
-      val params = parametersOf(postBodyJson)
+      val params = parametersOf(postBodyJson).get.value
       params.length === 1
       (params.head \ "in").asOpt[String] === Some("body")
       (params.head \ "schema" \ "$ref").asOpt[String] === Some("#/definitions/models.TestContent")
+    }
+
+    "ignore body parameter when no parser available" >> {
+      val params = parametersOf(postNoBodyJson)
+      params === None
     }
   }
 }

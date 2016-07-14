@@ -3,3 +3,5 @@
 #  summary: get player
 ###
 POST     /body                controllers.TestController.bodyAction
+
+POST     /noBody              controllers.TestController.noBodyAction

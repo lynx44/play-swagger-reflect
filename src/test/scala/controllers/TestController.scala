@@ -8,4 +8,8 @@ class TestController(implicit reader: Reads[TestContent]) extends Controller {
   def bodyAction = Action(parse.json[TestContent]) {
     ???
   }
+
+  def noBodyAction = Action {
+    Ok
+  }
 }

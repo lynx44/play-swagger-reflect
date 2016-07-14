@@ -11,5 +11,5 @@ libraryDependencies ++= Seq(
   "org.scala-lang" % "scala-reflect" % scalaVersion.value,
   "com.typesafe.play" %% "play-json" % "2.5.+" % "provided",
   "org.specs2" %% "specs2-core" % "3.6.6" % "test",
-  "com.typesafe.play" %% "play" % "2.5.+" % "test"
+  "com.typesafe.play" %% "play" % "2.5.+" % "provided"
 )

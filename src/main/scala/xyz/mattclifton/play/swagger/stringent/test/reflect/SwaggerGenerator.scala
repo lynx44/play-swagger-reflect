@@ -16,17 +16,12 @@ class EndPointSpecBuilder(modelQualifier: DomainModelQualifier, defaultPostBodyF
   override protected def readControllerParams: JsArray = {
     val params = super.readControllerParams
 
-    val controllerType = findControllerType(route.call.packageName, route.call.controller)
-
     controllerType.map(controller => {
-      val method = findControllerMethod(controller, route.call.method).get
-
-      val typeArgs = getGenericTypeArgs(method.returnType)
+      val typeArgs = getGenericTypeArgs(controllerMethod.get.returnType)
 
       val bodyType = typeArgs.map(_.head)
 
       if(bodyType.exists(contentType => !(contentType.weak_<:<(typeOf[AnyContent])))) {
-        println(s"not any content ${bodyType.get}")
         val bodyParam = JsonHelper.findByName(params, "body")
         bodyParam.fold(JsArray(Seq(JsObject(Map("name" → JsString("body"), "schema" -> Json.obj("$ref" → JsString(s"#/definitions/${bodyType.get}")), "in" → JsString("body")))) ++ params.value)) { param ⇒
           params
@@ -37,17 +32,17 @@ class EndPointSpecBuilder(modelQualifier: DomainModelQualifier, defaultPostBodyF
     }).getOrElse(params)
   }
 
-  protected def findControllerType(packageName: String, controllerName: String): Option[Type] = {
+  protected lazy val controllerType: Option[Type] = {
     val className = s"${route.call.packageName}.${route.call.controller}"
 
     val mirror = runtimeMirror(cl)
     Some(mirror.classSymbol(cl.loadClass(className)).toType)
   }
 
-  protected def findControllerMethod(controllerType: Type, methodName: String): Option[MethodSymbol] = {
-    controllerType.members.collect({
+  protected lazy val controllerMethod: Option[MethodSymbol] = {
+    controllerType.flatMap(_.members.collect({
       case m: MethodSymbol if m.name.toString == route.call.method => m
-    }).headOption
+    }).headOption)
   }
 
   protected def getGenericTypeArgs(t: Type): Option[List[Type]] = {

@@ -1,0 +1,7 @@
+
+###
+#  summary: get player
+###
+GET     /ok                controllers.TestController.okAction
+
+POST     /noBody              controllers.TestController.noBodyAction

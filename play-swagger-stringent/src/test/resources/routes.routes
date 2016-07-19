@@ -4,4 +4,7 @@
 ###
 GET     /ok                controllers.TestController.okAction
 
-POST     /noBody              controllers.TestController.noBodyAction
+###
+#  summary: get player
+###
+POST     /multiple              controllers.TestController.multipleResults

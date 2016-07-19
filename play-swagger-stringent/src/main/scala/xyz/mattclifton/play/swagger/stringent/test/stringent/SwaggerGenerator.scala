@@ -22,11 +22,15 @@ class EndPointSpecBuilder(modelQualifier: DomainModelQualifier, defaultPostBodyF
         println(s"type args: $typeArgs")
         typeArgs.map(args => {
           val responseTypes = args.filter(arg => arg.baseClasses.exists(b => b.name.decodedName.toString == "StringentResult"))
+          println(s"response types: $responseTypes")
           val newDoc = userDefinedDoc.map(doc => {
             val responses = (doc \ "responses").asOpt[JsObject].getOrElse(JsObject(Seq()))
             val updatedResponses = responseTypes.foldLeft(responses)((response, arg) => arg.typeSymbol.name.decodedName.toString match {
               case "OkResult" => mergeByResponseCode(play.api.http.Status.OK, buildSwaggerResponseItem(play.api.http.Status.OK), response)
+              case "BadRequestResult" => mergeByResponseCode(play.api.http.Status.BAD_REQUEST, buildSwaggerResponseItem(play.api.http.Status.BAD_REQUEST), response)
             })
+
+            println(updatedResponses)
 
             JsObject(("responses" -> updatedResponses) +: doc.fieldSet.filterNot(_._1 == "responses").toSeq)
           })
@@ -44,6 +48,6 @@ class EndPointSpecBuilder(modelQualifier: DomainModelQualifier, defaultPostBodyF
   }
 
   private def buildSwaggerResponseItem(statusCode: Int): JsObject = {
-    JsObject(Seq(statusCode.toString -> Json.obj(("description" -> "response"))))
+    JsObject(Seq(statusCode.toString -> Json.obj()))
   }
 }

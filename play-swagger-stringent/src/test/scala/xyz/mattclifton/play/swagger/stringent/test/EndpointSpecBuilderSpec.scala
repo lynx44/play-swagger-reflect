@@ -13,7 +13,7 @@ class EndpointSpecBuilderSpec extends Specification {
     lazy val pathJson = json \ "paths"
     lazy val definitionsJson = json \ "definitions"
     lazy val okJson = (pathJson \ "/ok" \ "get").as[JsObject]
-    lazy val postNoBodyJson = (pathJson \ "/noBody" \ "post").as[JsObject]
+    lazy val multipleResultsJson = (pathJson \ "/multiple" \ "post").as[JsObject]
 
     def parametersOf(json: JsValue): Option[JsArray] = {
       (json \ "parameters").asOpt[JsArray]
@@ -21,6 +21,11 @@ class EndpointSpecBuilderSpec extends Specification {
 
     "generate basic response code" >> {
       (okJson \ "responses" \ "200").asOpt[JsValue].nonEmpty === true
+    }
+
+    "generate multiple response codes" >> {
+      (multipleResultsJson \ "responses" \ "200").asOpt[JsValue].nonEmpty === true
+      (multipleResultsJson \ "responses" \ "400").asOpt[JsValue].nonEmpty === true
     }
   }
 }

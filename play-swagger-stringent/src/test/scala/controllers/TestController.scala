@@ -10,7 +10,7 @@ class TestController(implicit reader: Reads[TestContent]) extends Controller wit
     Ok
   }
 
-  def noBodyAction = Action {
+  def multipleResults = Action.stringent[OkResult, BadRequestResult] {
     Ok
   }
 }

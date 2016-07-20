@@ -8,3 +8,8 @@ GET     /ok                controllers.TestController.okAction
 #  summary: get player
 ###
 POST     /multiple              controllers.TestController.multipleResults
+
+###
+#  summary: get player
+###
+POST     /okWithContent              controllers.TestController.okWithContent

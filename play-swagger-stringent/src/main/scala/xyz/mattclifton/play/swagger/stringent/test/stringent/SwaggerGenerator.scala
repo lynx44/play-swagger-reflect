@@ -27,6 +27,7 @@ class EndPointSpecBuilder(modelQualifier: DomainModelQualifier, defaultPostBodyF
             val responses = (doc \ "responses").asOpt[JsObject].getOrElse(JsObject(Seq()))
             val updatedResponses = responseTypes.foldLeft(responses)((response, arg) => arg.typeSymbol.name.decodedName.toString match {
               case "OkResult" => mergeByResponseCode(play.api.http.Status.OK, buildSwaggerResponseItem(play.api.http.Status.OK), response)
+              case "OkWithContent" => mergeByResponseCode(play.api.http.Status.OK, buildSwaggerResponseItem(play.api.http.Status.OK, Some(getGenericTypeArgs(arg).get.head)), response)
               case "BadRequestResult" => mergeByResponseCode(play.api.http.Status.BAD_REQUEST, buildSwaggerResponseItem(play.api.http.Status.BAD_REQUEST), response)
             })
 
@@ -47,7 +48,26 @@ class EndPointSpecBuilder(modelQualifier: DomainModelQualifier, defaultPostBodyF
     JsObject(((statusCode.toString -> statusCodeValue) +: responses.fields.filterNot(_._1 == statusCode.toString)))
   }
 
-  private def buildSwaggerResponseItem(statusCode: Int): JsObject = {
-    JsObject(Seq(statusCode.toString -> Json.obj()))
+  private def buildSwaggerResponseItem(statusCode: Int, schemaType: Option[Type] = None): JsObject = {
+//    val schema = schemaType.map(t => Seq("schema" -> JsObject(Seq("$ref" -> JsString(s"#/definitions/${packageName(t.typeSymbol)}.${t.typeSymbol.name.decodedName}")))))
+
+//    val toSeq = schema.flatMap(a => a).toSeq
+    if(schemaType.nonEmpty) {
+      JsObject(Seq("schema" -> JsObject(Seq("$ref" -> JsString(s"#/definitions/${packageName(schemaType.get.typeSymbol)}.${schemaType.get.typeSymbol.name.decodedName}")))))
+    } else {
+      JsObject(Seq())
+    }
+
+  }
+
+  private def packageName(sym: Symbol) = {
+    def enclosingPackage(sym: Symbol): Symbol = {
+      if (sym == NoSymbol) NoSymbol
+      else if (sym.isPackage) sym
+      else enclosingPackage(sym.owner)
+    }
+    val pkg = enclosingPackage(sym)
+    if (pkg == scala.reflect.runtime.currentMirror.EmptyPackageClass) ""
+    else pkg.fullName
   }
 }

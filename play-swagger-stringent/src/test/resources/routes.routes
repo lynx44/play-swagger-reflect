@@ -49,3 +49,15 @@ POST     /partialContentWithContent               controllers.TestController.par
 POST     /multiStatusResult               controllers.TestController.multiStatusResult
 
 POST     /multiStatusWithContent               controllers.TestController.multiStatusWithContent
+
+POST     /movedPermanentlyResult               controllers.TestController.movedPermanentlyResult
+
+POST     /foundResult               controllers.TestController.foundResult
+
+POST     /seeOtherResult               controllers.TestController.seeOtherResult
+
+POST     /notModifiedResult               controllers.TestController.notModifiedResult
+
+POST     /temporaryRedirectResult               controllers.TestController.temporaryRedirectResult
+
+POST     /permanentRedirectResult               controllers.TestController.permanentRedirectResult

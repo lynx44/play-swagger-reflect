@@ -142,5 +142,46 @@ class EndpointSpecBuilderSpec extends Specification {
       (multiStatusWithContentJson \ "responses" \ "207" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
     }
 
+    lazy val movedPermanentlyResultJson = (pathJson \ "/movedPermanentlyResult" \ "post").as[JsObject]
+
+    // MovedPermanently
+    "MovedPermanently result" >> {
+      (movedPermanentlyResultJson \ "responses" \ "301").asOpt[JsValue].nonEmpty === true
+    }
+
+    lazy val foundResultJson = (pathJson \ "/foundResult" \ "post").as[JsObject]
+
+    // Found
+    "Found result" >> {
+      (foundResultJson \ "responses" \ "302").asOpt[JsValue].nonEmpty === true
+    }
+
+    lazy val seeOtherResultJson = (pathJson \ "/seeOtherResult" \ "post").as[JsObject]
+
+    // SeeOther
+    "SeeOther result" >> {
+      (seeOtherResultJson \ "responses" \ "303").asOpt[JsValue].nonEmpty === true
+    }
+
+    lazy val notModifiedResultJson = (pathJson \ "/notModifiedResult" \ "post").as[JsObject]
+
+    // NotModified
+    "NotModified result" >> {
+      (notModifiedResultJson \ "responses" \ "304").asOpt[JsValue].nonEmpty === true
+    }
+
+    lazy val temporaryRedirectResultJson = (pathJson \ "/temporaryRedirectResult" \ "post").as[JsObject]
+
+    // TemporaryRedirect
+    "TemporaryRedirect result" >> {
+      (temporaryRedirectResultJson \ "responses" \ "307").asOpt[JsValue].nonEmpty === true
+    }
+
+    lazy val permanentRedirectResultJson = (pathJson \ "/permanentRedirectResult" \ "post").as[JsObject]
+
+    // PermanentRedirect
+    "PermanentRedirect result" >> {
+      (permanentRedirectResultJson \ "responses" \ "308").asOpt[JsValue].nonEmpty === true
+    }
   }
 }

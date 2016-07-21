@@ -74,4 +74,28 @@ class TestController(implicit reader: Reads[TestContent], writeable: Writeable[T
   def multiStatusWithContent = Action.stringent[MultiStatusWithContent[TestContent]] {
     MultiStatus.withContent(TestContent(1, "name"))
   }
+
+  def movedPermanentlyResult = Action.stringent[MovedPermanentlyResult] {
+    MovedPermanently("/")
+  }
+
+  def foundResult = Action.stringent[FoundResult] {
+    Found("/")
+  }
+
+  def seeOtherResult = Action.stringent[SeeOtherResult] {
+    SeeOther("/")
+  }
+
+  def notModifiedResult = Action.stringent[NotModifiedResult] {
+    NotModified
+  }
+
+  def temporaryRedirectResult = Action.stringent[TemporaryRedirectResult] {
+    TemporaryRedirect("/")
+  }
+
+  def permanentRedirectResult = Action.stringent[PermanentRedirectResult] {
+    PermanentRedirect("/")
+  }
 }

@@ -26,9 +26,21 @@ class EndPointSpecBuilder(modelQualifier: DomainModelQualifier, defaultPostBodyF
           val newDoc = Some(finalDoc).map(doc => {
             val responses = (doc \ "responses").asOpt[JsObject].getOrElse(JsObject(Seq()))
             val updatedResponses = responseTypes.foldLeft(responses)((response, arg) => arg.typeSymbol.name.decodedName.toString match {
-              case "OkResult" => mergeByResponseCode(play.api.http.Status.OK, buildSwaggerResponseItem(play.api.http.Status.OK), response)
-              case "OkWithContent" => mergeByResponseCode(play.api.http.Status.OK, buildSwaggerResponseItem(play.api.http.Status.OK, Some(getGenericTypeArgs(arg).get.head)), response)
-              case "BadRequestResult" => mergeByResponseCode(play.api.http.Status.BAD_REQUEST, buildSwaggerResponseItem(play.api.http.Status.BAD_REQUEST), response)
+              case "OkResult" => mergeByResponseCode(play.api.http.Status.OK, response)
+              case "CreatedResult" => mergeByResponseCode(play.api.http.Status.CREATED, response)
+              case "AcceptedResult" => mergeByResponseCode(play.api.http.Status.ACCEPTED, response)
+              case "NonAuthoritativeInformationResult" => mergeByResponseCode(play.api.http.Status.NON_AUTHORITATIVE_INFORMATION, response)
+              case "NoContentResult" => mergeByResponseCode(play.api.http.Status.NO_CONTENT, response)
+              case "ResetContentResult" => mergeByResponseCode(play.api.http.Status.RESET_CONTENT, response)
+              case "PartialContentResult" => mergeByResponseCode(play.api.http.Status.PARTIAL_CONTENT, response)
+              case "MultiStatusResult" => mergeByResponseCode(play.api.http.Status.MULTI_STATUS, response)
+              case "BadRequestResult" => mergeByResponseCode(play.api.http.Status.BAD_REQUEST, response)
+              case "OkWithContent" => mergeByResponseCode(play.api.http.Status.OK, response, Some(arg))
+              case "CreatedWithContent" => mergeByResponseCode(play.api.http.Status.CREATED, response, Some(arg))
+              case "AcceptedWithContent" => mergeByResponseCode(play.api.http.Status.ACCEPTED, response, Some(arg))
+              case "NonAuthoritativeInformationWithContent" => mergeByResponseCode(play.api.http.Status.NON_AUTHORITATIVE_INFORMATION, response, Some(arg))
+              case "PartialContentWithContent" => mergeByResponseCode(play.api.http.Status.PARTIAL_CONTENT, response, Some(arg))
+              case "MultiStatusWithContent" => mergeByResponseCode(play.api.http.Status.MULTI_STATUS, response, Some(arg))
             })
 
             println(updatedResponses)
@@ -41,6 +53,10 @@ class EndPointSpecBuilder(modelQualifier: DomainModelQualifier, defaultPostBodyF
         finalDoc
       }
     }).getOrElse(finalDoc)
+  }
+
+  private def mergeByResponseCode(statusCode: Int, responses: JsObject, resultType: Option[Type] = None): JsObject = {
+    mergeByResponseCode(statusCode, buildSwaggerResponseItem(statusCode, resultType.map(t => getGenericTypeArgs(t).get.head)), responses)
   }
 
   private def mergeByResponseCode(statusCode: Int, status: JsObject, responses: JsObject): JsObject = {

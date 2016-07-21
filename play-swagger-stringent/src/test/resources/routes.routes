@@ -13,3 +13,39 @@ POST     /multiple              controllers.TestController.multipleResults
 #  summary: get player
 ###
 POST     /okWithContent              controllers.TestController.okWithContent
+
+POST     /noDoc              controllers.TestController.noDoc
+
+###
+#  responses:
+#    400:
+#      schema:
+#        $ref: '#/definitions/models.TestContent'
+###
+POST     /existingStatus              controllers.TestController.existingStatus
+
+# status codes
+
+POST     /createdResult               controllers.TestController.createdResult
+
+POST     /createdWithContent               controllers.TestController.createdWithContent
+
+POST     /acceptedResult               controllers.TestController.acceptedResult
+
+POST     /acceptedWithContent               controllers.TestController.acceptedWithContent
+
+POST     /nonAuthoritativeInformationResult               controllers.TestController.nonAuthoritativeInformationResult
+
+POST     /nonAuthoritativeInformationWithContent               controllers.TestController.nonAuthoritativeInformationWithContent
+
+POST     /noContentResult               controllers.TestController.noContentResult
+
+POST     /resetContentResult               controllers.TestController.resetContentResult
+
+POST     /partialContentResult               controllers.TestController.partialContentResult
+
+POST     /partialContentWithContent               controllers.TestController.partialContentWithContent
+
+POST     /multiStatusResult               controllers.TestController.multiStatusResult
+
+POST     /multiStatusWithContent               controllers.TestController.multiStatusWithContent

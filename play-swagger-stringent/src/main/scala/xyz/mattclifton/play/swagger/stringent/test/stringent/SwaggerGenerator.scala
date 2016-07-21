@@ -14,16 +14,16 @@ object EndPointSpecBuilderFactory {
 }
 
 class EndPointSpecBuilder(modelQualifier: DomainModelQualifier, defaultPostBodyFormat: String, route: Route, tag: Option[String], cl: ClassLoader) extends xyz.mattclifton.play.swagger.reflect.EndPointSpecBuilder(modelQualifier, defaultPostBodyFormat, route, tag, cl) {
-  override protected def transformSwaggerDoc(userDefinedDoc: Option[JsObject]): Option[JsObject] = {
+  override protected def transformFinalDoc(finalDoc: JsObject): JsObject = {
     controllerMethod.map(method => {
       println(s"controller method: $method")
       if(method.returnType.typeSymbol.name.decodedName.toString == "StringentReturn") {
         val typeArgs = getGenericTypeArgs(method.returnType)
         println(s"type args: $typeArgs")
-        typeArgs.map(args => {
+        typeArgs.flatMap(args => {
           val responseTypes = args.filter(arg => arg.baseClasses.exists(b => b.name.decodedName.toString == "StringentResult"))
           println(s"response types: $responseTypes")
-          val newDoc = userDefinedDoc.map(doc => {
+          val newDoc = Some(finalDoc).map(doc => {
             val responses = (doc \ "responses").asOpt[JsObject].getOrElse(JsObject(Seq()))
             val updatedResponses = responseTypes.foldLeft(responses)((response, arg) => arg.typeSymbol.name.decodedName.toString match {
               case "OkResult" => mergeByResponseCode(play.api.http.Status.OK, buildSwaggerResponseItem(play.api.http.Status.OK), response)
@@ -36,11 +36,11 @@ class EndPointSpecBuilder(modelQualifier: DomainModelQualifier, defaultPostBodyF
             JsObject(("responses" -> updatedResponses) +: doc.fieldSet.filterNot(_._1 == "responses").toSeq)
           })
           newDoc
-        }).getOrElse(userDefinedDoc)
+        }).getOrElse(finalDoc)
       } else {
-        userDefinedDoc
+        finalDoc
       }
-    }).getOrElse(userDefinedDoc)
+    }).getOrElse(finalDoc)
   }
 
   private def mergeByResponseCode(statusCode: Int, status: JsObject, responses: JsObject): JsObject = {

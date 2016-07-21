@@ -39,6 +39,15 @@ class EndpointSpecBuilderSpec extends Specification {
       refValue.get.value === "#/definitions/models.TestContent"
     }
 
+    "includes expected definition" >> {
+      val modelJson = definitionsJson \ "models.TestContent"
+      val propertiesJson = modelJson \ "properties"
+      val idProperty = (propertiesJson \ "id").asOpt[JsObject]
+      val nameProperty = (propertiesJson \ "name").asOpt[JsObject]
+      idProperty.nonEmpty === true
+      nameProperty.nonEmpty === true
+    }
+
     //generate with no doc
 
     //merge with existing response codes

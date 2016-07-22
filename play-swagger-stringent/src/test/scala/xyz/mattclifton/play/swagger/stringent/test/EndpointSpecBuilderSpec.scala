@@ -183,5 +183,252 @@ class EndpointSpecBuilderSpec extends Specification {
     "PermanentRedirect result" >> {
       (permanentRedirectResultJson \ "responses" \ "308").asOpt[JsValue].nonEmpty === true
     }
+
+    lazy val badRequestResultJson = (pathJson \ "/badRequestResult" \ "post").as[JsObject]
+    lazy val badRequestWithContentJson = (pathJson \ "/badRequestWithContent" \ "post").as[JsObject]
+
+    // BadRequest
+    "BadRequest result" >> {
+      (badRequestResultJson \ "responses" \ "400").asOpt[JsValue].nonEmpty === true
+    }
+
+    "BadRequest with content" >> {
+      (badRequestWithContentJson \ "responses" \ "400").asOpt[JsValue].nonEmpty === true
+      (badRequestWithContentJson \ "responses" \ "400" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
+
+    lazy val unauthorizedResultJson = (pathJson \ "/unauthorizedResult" \ "post").as[JsObject]
+    lazy val unauthorizedWithContentJson = (pathJson \ "/unauthorizedWithContent" \ "post").as[JsObject]
+
+    // Unauthorized
+    "Unauthorized result" >> {
+      (unauthorizedResultJson \ "responses" \ "401").asOpt[JsValue].nonEmpty === true
+    }
+
+    "Unauthorized with content" >> {
+      (unauthorizedWithContentJson \ "responses" \ "401").asOpt[JsValue].nonEmpty === true
+      (unauthorizedWithContentJson \ "responses" \ "401" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
+
+    lazy val paymentRequiredResultJson = (pathJson \ "/paymentRequiredResult" \ "post").as[JsObject]
+    lazy val paymentRequiredWithContentJson = (pathJson \ "/paymentRequiredWithContent" \ "post").as[JsObject]
+
+    // PaymentRequired
+    "PaymentRequired result" >> {
+      (paymentRequiredResultJson \ "responses" \ "402").asOpt[JsValue].nonEmpty === true
+    }
+
+    "PaymentRequired with content" >> {
+      (paymentRequiredWithContentJson \ "responses" \ "402").asOpt[JsValue].nonEmpty === true
+      (paymentRequiredWithContentJson \ "responses" \ "402" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
+
+    lazy val forbiddenResultJson = (pathJson \ "/forbiddenResult" \ "post").as[JsObject]
+    lazy val forbiddenWithContentJson = (pathJson \ "/forbiddenWithContent" \ "post").as[JsObject]
+
+    // Forbidden
+    "Forbidden result" >> {
+      (forbiddenResultJson \ "responses" \ "403").asOpt[JsValue].nonEmpty === true
+    }
+
+    "Forbidden with content" >> {
+      (forbiddenWithContentJson \ "responses" \ "403").asOpt[JsValue].nonEmpty === true
+      (forbiddenWithContentJson \ "responses" \ "403" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
+
+    lazy val notFoundResultJson = (pathJson \ "/notFoundResult" \ "post").as[JsObject]
+    lazy val notFoundWithContentJson = (pathJson \ "/notFoundWithContent" \ "post").as[JsObject]
+
+    // NotFound
+    "NotFound result" >> {
+      (notFoundResultJson \ "responses" \ "404").asOpt[JsValue].nonEmpty === true
+    }
+
+    "NotFound with content" >> {
+      (notFoundWithContentJson \ "responses" \ "404").asOpt[JsValue].nonEmpty === true
+      (notFoundWithContentJson \ "responses" \ "404" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
+
+    lazy val methodNotAllowedResultJson = (pathJson \ "/methodNotAllowedResult" \ "post").as[JsObject]
+    lazy val methodNotAllowedWithContentJson = (pathJson \ "/methodNotAllowedWithContent" \ "post").as[JsObject]
+
+    // MethodNotAllowed
+    "MethodNotAllowed result" >> {
+      (methodNotAllowedResultJson \ "responses" \ "405").asOpt[JsValue].nonEmpty === true
+    }
+
+    "MethodNotAllowed with content" >> {
+      (methodNotAllowedWithContentJson \ "responses" \ "405").asOpt[JsValue].nonEmpty === true
+      (methodNotAllowedWithContentJson \ "responses" \ "405" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
+
+    lazy val notAcceptableResultJson = (pathJson \ "/notAcceptableResult" \ "post").as[JsObject]
+    lazy val notAcceptableWithContentJson = (pathJson \ "/notAcceptableWithContent" \ "post").as[JsObject]
+
+    // NotAcceptable
+    "NotAcceptable result" >> {
+      (notAcceptableResultJson \ "responses" \ "406").asOpt[JsValue].nonEmpty === true
+    }
+
+    "NotAcceptable with content" >> {
+      (notAcceptableWithContentJson \ "responses" \ "406").asOpt[JsValue].nonEmpty === true
+      (notAcceptableWithContentJson \ "responses" \ "406" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
+
+    lazy val requestTimeoutResultJson = (pathJson \ "/requestTimeoutResult" \ "post").as[JsObject]
+    lazy val requestTimeoutWithContentJson = (pathJson \ "/requestTimeoutWithContent" \ "post").as[JsObject]
+
+    // RequestTimeout
+    "RequestTimeout result" >> {
+      (requestTimeoutResultJson \ "responses" \ "408").asOpt[JsValue].nonEmpty === true
+    }
+
+    "RequestTimeout with content" >> {
+      (requestTimeoutWithContentJson \ "responses" \ "408").asOpt[JsValue].nonEmpty === true
+      (requestTimeoutWithContentJson \ "responses" \ "408" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
+
+    lazy val conflictResultJson = (pathJson \ "/conflictResult" \ "post").as[JsObject]
+    lazy val conflictWithContentJson = (pathJson \ "/conflictWithContent" \ "post").as[JsObject]
+
+    // Conflict
+    "Conflict result" >> {
+      (conflictResultJson \ "responses" \ "409").asOpt[JsValue].nonEmpty === true
+    }
+
+    "Conflict with content" >> {
+      (conflictWithContentJson \ "responses" \ "409").asOpt[JsValue].nonEmpty === true
+      (conflictWithContentJson \ "responses" \ "409" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
+
+    lazy val goneResultJson = (pathJson \ "/goneResult" \ "post").as[JsObject]
+    lazy val goneWithContentJson = (pathJson \ "/goneWithContent" \ "post").as[JsObject]
+
+    // Gone
+    "Gone result" >> {
+      (goneResultJson \ "responses" \ "410").asOpt[JsValue].nonEmpty === true
+    }
+
+    "Gone with content" >> {
+      (goneWithContentJson \ "responses" \ "410").asOpt[JsValue].nonEmpty === true
+      (goneWithContentJson \ "responses" \ "410" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
+
+    lazy val preconditionFailedResultJson = (pathJson \ "/preconditionFailedResult" \ "post").as[JsObject]
+    lazy val preconditionFailedWithContentJson = (pathJson \ "/preconditionFailedWithContent" \ "post").as[JsObject]
+
+    // PreconditionFailed
+    "PreconditionFailed result" >> {
+      (preconditionFailedResultJson \ "responses" \ "412").asOpt[JsValue].nonEmpty === true
+    }
+
+    "PreconditionFailed with content" >> {
+      (preconditionFailedWithContentJson \ "responses" \ "412").asOpt[JsValue].nonEmpty === true
+      (preconditionFailedWithContentJson \ "responses" \ "412" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
+
+    lazy val entityTooLargeResultJson = (pathJson \ "/entityTooLargeResult" \ "post").as[JsObject]
+    lazy val entityTooLargeWithContentJson = (pathJson \ "/entityTooLargeWithContent" \ "post").as[JsObject]
+
+    // EntityTooLarge
+    "EntityTooLarge result" >> {
+      (entityTooLargeResultJson \ "responses" \ "413").asOpt[JsValue].nonEmpty === true
+    }
+
+    "EntityTooLarge with content" >> {
+      (entityTooLargeWithContentJson \ "responses" \ "413").asOpt[JsValue].nonEmpty === true
+      (entityTooLargeWithContentJson \ "responses" \ "413" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
+
+    lazy val uriTooLongResultJson = (pathJson \ "/uriTooLongResult" \ "post").as[JsObject]
+    lazy val uriTooLongWithContentJson = (pathJson \ "/uriTooLongWithContent" \ "post").as[JsObject]
+
+    // UriTooLong
+    "UriTooLong result" >> {
+      (uriTooLongResultJson \ "responses" \ "414").asOpt[JsValue].nonEmpty === true
+    }
+
+    "UriTooLong with content" >> {
+      (uriTooLongWithContentJson \ "responses" \ "414").asOpt[JsValue].nonEmpty === true
+      (uriTooLongWithContentJson \ "responses" \ "414" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
+
+    lazy val unsupportedMediaTypeResultJson = (pathJson \ "/unsupportedMediaTypeResult" \ "post").as[JsObject]
+    lazy val unsupportedMediaTypeWithContentJson = (pathJson \ "/unsupportedMediaTypeWithContent" \ "post").as[JsObject]
+
+    // UnsupportedMediaType
+    "UnsupportedMediaType result" >> {
+      (unsupportedMediaTypeResultJson \ "responses" \ "415").asOpt[JsValue].nonEmpty === true
+    }
+
+    "UnsupportedMediaType with content" >> {
+      (unsupportedMediaTypeWithContentJson \ "responses" \ "415").asOpt[JsValue].nonEmpty === true
+      (unsupportedMediaTypeWithContentJson \ "responses" \ "415" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
+
+    lazy val expectationFailedResultJson = (pathJson \ "/expectationFailedResult" \ "post").as[JsObject]
+    lazy val expectationFailedWithContentJson = (pathJson \ "/expectationFailedWithContent" \ "post").as[JsObject]
+
+    // ExpectationFailed
+    "ExpectationFailed result" >> {
+      (expectationFailedResultJson \ "responses" \ "417").asOpt[JsValue].nonEmpty === true
+    }
+
+    "ExpectationFailed with content" >> {
+      (expectationFailedWithContentJson \ "responses" \ "417").asOpt[JsValue].nonEmpty === true
+      (expectationFailedWithContentJson \ "responses" \ "417" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
+
+    lazy val unprocessableEntityResultJson = (pathJson \ "/unprocessableEntityResult" \ "post").as[JsObject]
+    lazy val unprocessableEntityWithContentJson = (pathJson \ "/unprocessableEntityWithContent" \ "post").as[JsObject]
+
+    // UnprocessableEntity
+    "UnprocessableEntity result" >> {
+      (unprocessableEntityResultJson \ "responses" \ "422").asOpt[JsValue].nonEmpty === true
+    }
+
+    "UnprocessableEntity with content" >> {
+      (unprocessableEntityWithContentJson \ "responses" \ "422").asOpt[JsValue].nonEmpty === true
+      (unprocessableEntityWithContentJson \ "responses" \ "422" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
+
+    lazy val lockedResultJson = (pathJson \ "/lockedResult" \ "post").as[JsObject]
+    lazy val lockedWithContentJson = (pathJson \ "/lockedWithContent" \ "post").as[JsObject]
+
+    // Locked
+    "Locked result" >> {
+      (lockedResultJson \ "responses" \ "423").asOpt[JsValue].nonEmpty === true
+    }
+
+    "Locked with content" >> {
+      (lockedWithContentJson \ "responses" \ "423").asOpt[JsValue].nonEmpty === true
+      (lockedWithContentJson \ "responses" \ "423" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
+
+    lazy val failedDependencyResultJson = (pathJson \ "/failedDependencyResult" \ "post").as[JsObject]
+    lazy val failedDependencyWithContentJson = (pathJson \ "/failedDependencyWithContent" \ "post").as[JsObject]
+
+    // FailedDependency
+    "FailedDependency result" >> {
+      (failedDependencyResultJson \ "responses" \ "424").asOpt[JsValue].nonEmpty === true
+    }
+
+    "FailedDependency with content" >> {
+      (failedDependencyWithContentJson \ "responses" \ "424").asOpt[JsValue].nonEmpty === true
+      (failedDependencyWithContentJson \ "responses" \ "424" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
+
+    lazy val tooManyRequestsResultJson = (pathJson \ "/tooManyRequestsResult" \ "post").as[JsObject]
+    lazy val tooManyRequestsWithContentJson = (pathJson \ "/tooManyRequestsWithContent" \ "post").as[JsObject]
+
+    // TooManyRequests
+    "TooManyRequests result" >> {
+      (tooManyRequestsResultJson \ "responses" \ "429").asOpt[JsValue].nonEmpty === true
+    }
+
+    "TooManyRequests with content" >> {
+      (tooManyRequestsWithContentJson \ "responses" \ "429").asOpt[JsValue].nonEmpty === true
+      (tooManyRequestsWithContentJson \ "responses" \ "429" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
   }
 }

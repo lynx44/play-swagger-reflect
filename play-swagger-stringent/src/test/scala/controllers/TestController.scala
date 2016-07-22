@@ -98,4 +98,156 @@ class TestController(implicit reader: Reads[TestContent], writeable: Writeable[T
   def permanentRedirectResult = Action.stringent[PermanentRedirectResult] {
     PermanentRedirect("/")
   }
+
+  def badRequestResult = Action.stringent[BadRequestResult] {
+    BadRequest
+  }
+
+  def badRequestWithContent = Action.stringent[BadRequestWithContent[TestContent]] {
+    BadRequest.withContent(TestContent(1, "name"))
+  }
+
+  def unauthorizedResult = Action.stringent[UnauthorizedResult] {
+    Unauthorized
+  }
+
+  def unauthorizedWithContent = Action.stringent[UnauthorizedWithContent[TestContent]] {
+    Unauthorized.withContent(TestContent(1, "name"))
+  }
+
+  def paymentRequiredResult = Action.stringent[PaymentRequiredResult] {
+    PaymentRequired
+  }
+
+  def paymentRequiredWithContent = Action.stringent[PaymentRequiredWithContent[TestContent]] {
+    PaymentRequired.withContent(TestContent(1, "name"))
+  }
+
+  def forbiddenResult = Action.stringent[ForbiddenResult] {
+    Forbidden
+  }
+
+  def forbiddenWithContent = Action.stringent[ForbiddenWithContent[TestContent]] {
+    Forbidden.withContent(TestContent(1, "name"))
+  }
+
+  def notFoundResult = Action.stringent[NotFoundResult] {
+    NotFound
+  }
+
+  def notFoundWithContent = Action.stringent[NotFoundWithContent[TestContent]] {
+    NotFound.withContent(TestContent(1, "name"))
+  }
+
+  def methodNotAllowedResult = Action.stringent[MethodNotAllowedResult] {
+    MethodNotAllowed
+  }
+
+  def methodNotAllowedWithContent = Action.stringent[MethodNotAllowedWithContent[TestContent]] {
+    MethodNotAllowed.withContent(TestContent(1, "name"))
+  }
+
+  def notAcceptableResult = Action.stringent[NotAcceptableResult] {
+    NotAcceptable
+  }
+
+  def notAcceptableWithContent = Action.stringent[NotAcceptableWithContent[TestContent]] {
+    NotAcceptable.withContent(TestContent(1, "name"))
+  }
+
+  def requestTimeoutResult = Action.stringent[RequestTimeoutResult] {
+    RequestTimeout
+  }
+
+  def requestTimeoutWithContent = Action.stringent[RequestTimeoutWithContent[TestContent]] {
+    RequestTimeout.withContent(TestContent(1, "name"))
+  }
+
+  def conflictResult = Action.stringent[ConflictResult] {
+    Conflict
+  }
+
+  def conflictWithContent = Action.stringent[ConflictWithContent[TestContent]] {
+    Conflict.withContent(TestContent(1, "name"))
+  }
+
+  def goneResult = Action.stringent[GoneResult] {
+    Gone
+  }
+
+  def goneWithContent = Action.stringent[GoneWithContent[TestContent]] {
+    Gone.withContent(TestContent(1, "name"))
+  }
+
+  def preconditionFailedResult = Action.stringent[PreconditionFailedResult] {
+    PreconditionFailed
+  }
+
+  def preconditionFailedWithContent = Action.stringent[PreconditionFailedWithContent[TestContent]] {
+    PreconditionFailed.withContent(TestContent(1, "name"))
+  }
+
+  def entityTooLargeResult = Action.stringent[EntityTooLargeResult] {
+    EntityTooLarge
+  }
+
+  def entityTooLargeWithContent = Action.stringent[EntityTooLargeWithContent[TestContent]] {
+    EntityTooLarge.withContent(TestContent(1, "name"))
+  }
+
+  def uriTooLongResult = Action.stringent[UriTooLongResult] {
+    UriTooLong
+  }
+
+  def uriTooLongWithContent = Action.stringent[UriTooLongWithContent[TestContent]] {
+    UriTooLong.withContent(TestContent(1, "name"))
+  }
+
+  def unsupportedMediaTypeResult = Action.stringent[UnsupportedMediaTypeResult] {
+    UnsupportedMediaType
+  }
+
+  def unsupportedMediaTypeWithContent = Action.stringent[UnsupportedMediaTypeWithContent[TestContent]] {
+    UnsupportedMediaType.withContent(TestContent(1, "name"))
+  }
+
+  def expectationFailedResult = Action.stringent[ExpectationFailedResult] {
+    ExpectationFailed
+  }
+
+  def expectationFailedWithContent = Action.stringent[ExpectationFailedWithContent[TestContent]] {
+    ExpectationFailed.withContent(TestContent(1, "name"))
+  }
+
+  def unprocessableEntityResult = Action.stringent[UnprocessableEntityResult] {
+    UnprocessableEntity
+  }
+
+  def unprocessableEntityWithContent = Action.stringent[UnprocessableEntityWithContent[TestContent]] {
+    UnprocessableEntity.withContent(TestContent(1, "name"))
+  }
+
+  def lockedResult = Action.stringent[LockedResult] {
+    Locked
+  }
+
+  def lockedWithContent = Action.stringent[LockedWithContent[TestContent]] {
+    Locked.withContent(TestContent(1, "name"))
+  }
+
+  def failedDependencyResult = Action.stringent[FailedDependencyResult] {
+    FailedDependency
+  }
+
+  def failedDependencyWithContent = Action.stringent[FailedDependencyWithContent[TestContent]] {
+    FailedDependency.withContent(TestContent(1, "name"))
+  }
+
+  def tooManyRequestsResult = Action.stringent[TooManyRequestsResult] {
+    TooManyRequests
+  }
+
+  def tooManyRequestsWithContent = Action.stringent[TooManyRequestsWithContent[TestContent]] {
+    TooManyRequests.withContent(TestContent(1, "name"))
+  }
 }

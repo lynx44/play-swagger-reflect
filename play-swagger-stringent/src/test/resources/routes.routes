@@ -61,3 +61,79 @@ POST     /notModifiedResult               controllers.TestController.notModified
 POST     /temporaryRedirectResult               controllers.TestController.temporaryRedirectResult
 
 POST     /permanentRedirectResult               controllers.TestController.permanentRedirectResult
+
+POST     /badRequestResult               controllers.TestController.badRequestResult
+
+POST     /badRequestWithContent               controllers.TestController.badRequestWithContent
+
+POST     /unauthorizedResult               controllers.TestController.unauthorizedResult
+
+POST     /unauthorizedWithContent               controllers.TestController.unauthorizedWithContent
+
+POST     /paymentRequiredResult               controllers.TestController.paymentRequiredResult
+
+POST     /paymentRequiredWithContent               controllers.TestController.paymentRequiredWithContent
+
+POST     /forbiddenResult               controllers.TestController.forbiddenResult
+
+POST     /forbiddenWithContent               controllers.TestController.forbiddenWithContent
+
+POST     /notFoundResult               controllers.TestController.notFoundResult
+
+POST     /notFoundWithContent               controllers.TestController.notFoundWithContent
+
+POST     /methodNotAllowedResult               controllers.TestController.methodNotAllowedResult
+
+POST     /methodNotAllowedWithContent               controllers.TestController.methodNotAllowedWithContent
+
+POST     /notAcceptableResult               controllers.TestController.notAcceptableResult
+
+POST     /notAcceptableWithContent               controllers.TestController.notAcceptableWithContent
+
+POST     /requestTimeoutResult               controllers.TestController.requestTimeoutResult
+
+POST     /requestTimeoutWithContent               controllers.TestController.requestTimeoutWithContent
+
+POST     /conflictResult               controllers.TestController.conflictResult
+
+POST     /conflictWithContent               controllers.TestController.conflictWithContent
+
+POST     /goneResult               controllers.TestController.goneResult
+
+POST     /goneWithContent               controllers.TestController.goneWithContent
+
+POST     /preconditionFailedResult               controllers.TestController.preconditionFailedResult
+
+POST     /preconditionFailedWithContent               controllers.TestController.preconditionFailedWithContent
+
+POST     /entityTooLargeResult               controllers.TestController.entityTooLargeResult
+
+POST     /entityTooLargeWithContent               controllers.TestController.entityTooLargeWithContent
+
+POST     /uriTooLongResult               controllers.TestController.uriTooLongResult
+
+POST     /uriTooLongWithContent               controllers.TestController.uriTooLongWithContent
+
+POST     /unsupportedMediaTypeResult               controllers.TestController.unsupportedMediaTypeResult
+
+POST     /unsupportedMediaTypeWithContent               controllers.TestController.unsupportedMediaTypeWithContent
+
+POST     /expectationFailedResult               controllers.TestController.expectationFailedResult
+
+POST     /expectationFailedWithContent               controllers.TestController.expectationFailedWithContent
+
+POST     /unprocessableEntityResult               controllers.TestController.unprocessableEntityResult
+
+POST     /unprocessableEntityWithContent               controllers.TestController.unprocessableEntityWithContent
+
+POST     /lockedResult               controllers.TestController.lockedResult
+
+POST     /lockedWithContent               controllers.TestController.lockedWithContent
+
+POST     /failedDependencyResult               controllers.TestController.failedDependencyResult
+
+POST     /failedDependencyWithContent               controllers.TestController.failedDependencyWithContent
+
+POST     /tooManyRequestsResult               controllers.TestController.tooManyRequestsResult
+
+POST     /tooManyRequestsWithContent               controllers.TestController.tooManyRequestsWithContent

@@ -430,5 +430,96 @@ class EndpointSpecBuilderSpec extends Specification {
       (tooManyRequestsWithContentJson \ "responses" \ "429").asOpt[JsValue].nonEmpty === true
       (tooManyRequestsWithContentJson \ "responses" \ "429" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
     }
+
+    lazy val internalServerErrorResultJson = (pathJson \ "/internalServerErrorResult" \ "post").as[JsObject]
+    lazy val internalServerErrorWithContentJson = (pathJson \ "/internalServerErrorWithContent" \ "post").as[JsObject]
+
+    // InternalServerError
+    "InternalServerError result" >> {
+      (internalServerErrorResultJson \ "responses" \ "500").asOpt[JsValue].nonEmpty === true
+    }
+
+    "InternalServerError with content" >> {
+      (internalServerErrorWithContentJson \ "responses" \ "500").asOpt[JsValue].nonEmpty === true
+      (internalServerErrorWithContentJson \ "responses" \ "500" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
+
+    lazy val notImplementedResultJson = (pathJson \ "/notImplementedResult" \ "post").as[JsObject]
+    lazy val notImplementedWithContentJson = (pathJson \ "/notImplementedWithContent" \ "post").as[JsObject]
+
+    // NotImplemented
+    "NotImplemented result" >> {
+      (notImplementedResultJson \ "responses" \ "501").asOpt[JsValue].nonEmpty === true
+    }
+
+    "NotImplemented with content" >> {
+      (notImplementedWithContentJson \ "responses" \ "501").asOpt[JsValue].nonEmpty === true
+      (notImplementedWithContentJson \ "responses" \ "501" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
+    
+    lazy val badGatewayResultJson = (pathJson \ "/badGatewayResult" \ "post").as[JsObject]
+    lazy val badGatewayWithContentJson = (pathJson \ "/badGatewayWithContent" \ "post").as[JsObject]
+
+    // BadGateway
+    "BadGateway result" >> {
+      (badGatewayResultJson \ "responses" \ "502").asOpt[JsValue].nonEmpty === true
+    }
+
+    "BadGateway with content" >> {
+      (badGatewayWithContentJson \ "responses" \ "502").asOpt[JsValue].nonEmpty === true
+      (badGatewayWithContentJson \ "responses" \ "502" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
+    
+    lazy val serviceUnavailableResultJson = (pathJson \ "/serviceUnavailableResult" \ "post").as[JsObject]
+    lazy val serviceUnavailableWithContentJson = (pathJson \ "/serviceUnavailableWithContent" \ "post").as[JsObject]
+
+    // ServiceUnavailable
+    "ServiceUnavailable result" >> {
+      (serviceUnavailableResultJson \ "responses" \ "503").asOpt[JsValue].nonEmpty === true
+    }
+
+    "ServiceUnavailable with content" >> {
+      (serviceUnavailableWithContentJson \ "responses" \ "503").asOpt[JsValue].nonEmpty === true
+      (serviceUnavailableWithContentJson \ "responses" \ "503" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
+    
+    lazy val gatewayTimeoutResultJson = (pathJson \ "/gatewayTimeoutResult" \ "post").as[JsObject]
+    lazy val gatewayTimeoutWithContentJson = (pathJson \ "/gatewayTimeoutWithContent" \ "post").as[JsObject]
+
+    // GatewayTimeout
+    "GatewayTimeout result" >> {
+      (gatewayTimeoutResultJson \ "responses" \ "504").asOpt[JsValue].nonEmpty === true
+    }
+
+    "GatewayTimeout with content" >> {
+      (gatewayTimeoutWithContentJson \ "responses" \ "504").asOpt[JsValue].nonEmpty === true
+      (gatewayTimeoutWithContentJson \ "responses" \ "504" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
+    
+    lazy val httpVersionNotSupportedResultJson = (pathJson \ "/httpVersionNotSupportedResult" \ "post").as[JsObject]
+    lazy val httpVersionNotSupportedWithContentJson = (pathJson \ "/httpVersionNotSupportedWithContent" \ "post").as[JsObject]
+
+    // HttpVersionNotSupported
+    "HttpVersionNotSupported result" >> {
+      (httpVersionNotSupportedResultJson \ "responses" \ "505").asOpt[JsValue].nonEmpty === true
+    }
+
+    "HttpVersionNotSupported with content" >> {
+      (httpVersionNotSupportedWithContentJson \ "responses" \ "505").asOpt[JsValue].nonEmpty === true
+      (httpVersionNotSupportedWithContentJson \ "responses" \ "505" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
+    
+    lazy val insufficientStorageResultJson = (pathJson \ "/insufficientStorageResult" \ "post").as[JsObject]
+    lazy val insufficientStorageWithContentJson = (pathJson \ "/insufficientStorageWithContent" \ "post").as[JsObject]
+
+    // InsufficientStorage
+    "InsufficientStorage result" >> {
+      (insufficientStorageResultJson \ "responses" \ "507").asOpt[JsValue].nonEmpty === true
+    }
+
+    "InsufficientStorage with content" >> {
+      (insufficientStorageWithContentJson \ "responses" \ "507").asOpt[JsValue].nonEmpty === true
+      (insufficientStorageWithContentJson \ "responses" \ "507" \ "schema" \ "$ref").as[JsString].value === "#/definitions/models.TestContent"
+    }
   }
 }

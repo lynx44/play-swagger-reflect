@@ -137,3 +137,31 @@ POST     /failedDependencyWithContent               controllers.TestController.f
 POST     /tooManyRequestsResult               controllers.TestController.tooManyRequestsResult
 
 POST     /tooManyRequestsWithContent               controllers.TestController.tooManyRequestsWithContent
+
+POST     /internalServerErrorResult               controllers.TestController.internalServerErrorResult
+
+POST     /internalServerErrorWithContent               controllers.TestController.internalServerErrorWithContent
+
+POST     /notImplementedResult               controllers.TestController.notImplementedResult
+
+POST     /notImplementedWithContent               controllers.TestController.notImplementedWithContent
+
+POST     /badGatewayResult               controllers.TestController.badGatewayResult
+
+POST     /badGatewayWithContent               controllers.TestController.badGatewayWithContent
+
+POST     /serviceUnavailableResult               controllers.TestController.serviceUnavailableResult
+
+POST     /serviceUnavailableWithContent               controllers.TestController.serviceUnavailableWithContent
+
+POST     /gatewayTimeoutResult               controllers.TestController.gatewayTimeoutResult
+
+POST     /gatewayTimeoutWithContent               controllers.TestController.gatewayTimeoutWithContent
+
+POST     /httpVersionNotSupportedResult               controllers.TestController.httpVersionNotSupportedResult
+
+POST     /httpVersionNotSupportedWithContent               controllers.TestController.httpVersionNotSupportedWithContent
+
+POST     /insufficientStorageResult               controllers.TestController.insufficientStorageResult
+
+POST     /insufficientStorageWithContent               controllers.TestController.insufficientStorageWithContent

@@ -250,4 +250,60 @@ class TestController(implicit reader: Reads[TestContent], writeable: Writeable[T
   def tooManyRequestsWithContent = Action.stringent[TooManyRequestsWithContent[TestContent]] {
     TooManyRequests.withContent(TestContent(1, "name"))
   }
+
+  def internalServerErrorResult = Action.stringent[InternalServerErrorResult] {
+    InternalServerError
+  }
+
+  def internalServerErrorWithContent = Action.stringent[InternalServerErrorWithContent[TestContent]] {
+    InternalServerError.withContent(TestContent(1, "name"))
+  }
+
+  def notImplementedResult = Action.stringent[NotImplementedResult] {
+    NotImplemented
+  }
+
+  def notImplementedWithContent = Action.stringent[NotImplementedWithContent[TestContent]] {
+    NotImplemented.withContent(TestContent(1, "name"))
+  }
+
+  def badGatewayResult = Action.stringent[BadGatewayResult] {
+    BadGateway
+  }
+
+  def badGatewayWithContent = Action.stringent[BadGatewayWithContent[TestContent]] {
+    BadGateway.withContent(TestContent(1, "name"))
+  }
+
+  def serviceUnavailableResult = Action.stringent[ServiceUnavailableResult] {
+    ServiceUnavailable
+  }
+
+  def serviceUnavailableWithContent = Action.stringent[ServiceUnavailableWithContent[TestContent]] {
+    ServiceUnavailable.withContent(TestContent(1, "name"))
+  }
+
+  def gatewayTimeoutResult = Action.stringent[GatewayTimeoutResult] {
+    GatewayTimeout
+  }
+
+  def gatewayTimeoutWithContent = Action.stringent[GatewayTimeoutWithContent[TestContent]] {
+    GatewayTimeout.withContent(TestContent(1, "name"))
+  }
+
+  def httpVersionNotSupportedResult = Action.stringent[HttpVersionNotSupportedResult] {
+    HttpVersionNotSupported
+  }
+
+  def httpVersionNotSupportedWithContent = Action.stringent[HttpVersionNotSupportedWithContent[TestContent]] {
+    HttpVersionNotSupported.withContent(TestContent(1, "name"))
+  }
+
+  def insufficientStorageResult = Action.stringent[InsufficientStorageResult] {
+    InsufficientStorage
+  }
+
+  def insufficientStorageWithContent = Action.stringent[InsufficientStorageWithContent[TestContent]] {
+    InsufficientStorage.withContent(TestContent(1, "name"))
+  }
 }

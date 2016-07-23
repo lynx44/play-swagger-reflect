@@ -1,10 +1,8 @@
 ## Purpose
 
-The goal of play-swagger-reflect and play-swagger-stringent is to automatically generate swagger documentation. This ensures your documentation is always up to date without manual effort.
+The goal of play-swagger-reflect and play-swagger-stringent is to automatically generate swagger documentation from Play Framework controller actions. This ensures your documentation is always up to date without manual effort.
 
-play-swagger-reflect has limited utility on it's own. It allows you to automatically generate documentation for POST body parameters.
-
-To get the most out of this project, you'll want to use [play-stringent](https://github.com/lynx44/play-stringent) and play-swagger-stringent.
+To get the most out of this project, you'll want to use [play-stringent](https://github.com/lynx44/play-stringent) with play-swagger-stringent.
 
 ### Example
 
@@ -68,7 +66,7 @@ This will create the following swagger documentation:
 
 ### Swagger Configuration
 
-Swagger generation is based on [play-swagger](https://github.com/iheartradio/play-swagger) (currently a forked version), so configuration remains similar.
+Swagger generation is based on [play-swagger](https://github.com/iheartradio/play-swagger) (currently this [forked version](https://github.com/lynx44/play-swagger)), so configuration remains similar.
 
 To use play-swagger stringent, you need to inject the stringent endpoint builder:
 

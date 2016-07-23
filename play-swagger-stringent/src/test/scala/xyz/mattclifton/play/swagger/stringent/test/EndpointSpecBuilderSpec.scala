@@ -59,6 +59,10 @@ class EndpointSpecBuilderSpec extends Specification {
       (existingStatusJson \ "responses" \ "400").asOpt[JsValue].nonEmpty === true
     }
 
+    "includes description" >> {
+      (okJson \ "responses" \ "200" \ "description").asOpt[JsValue].nonEmpty === true
+    }
+
     // throw error when response type doesn't match existing user doc?
 
     // status codes

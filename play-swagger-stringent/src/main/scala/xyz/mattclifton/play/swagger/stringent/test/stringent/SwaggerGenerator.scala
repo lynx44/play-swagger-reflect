@@ -123,15 +123,11 @@ class EndPointSpecBuilder(modelQualifier: DomainModelQualifier, defaultPostBodyF
   }
 
   private def buildSwaggerResponseItem(statusCode: Int, schemaType: Option[Type] = None): JsObject = {
-//    val schema = schemaType.map(t => Seq("schema" -> JsObject(Seq("$ref" -> JsString(s"#/definitions/${packageName(t.typeSymbol)}.${t.typeSymbol.name.decodedName}")))))
-
-//    val toSeq = schema.flatMap(a => a).toSeq
     if(schemaType.nonEmpty) {
-      JsObject(Seq("schema" -> JsObject(Seq("$ref" -> JsString(s"#/definitions/${packageName(schemaType.get.typeSymbol)}.${schemaType.get.typeSymbol.name.decodedName}")))))
+      JsObject(Seq("description" -> JsString(s"${statusCode} response"), "schema" -> JsObject(Seq("$ref" -> JsString(s"#/definitions/${packageName(schemaType.get.typeSymbol)}.${schemaType.get.typeSymbol.name.decodedName}")))))
     } else {
-      JsObject(Seq())
+      JsObject(Seq("description" -> JsString(s"${statusCode} response")))
     }
-
   }
 
   private def packageName(sym: Symbol) = {

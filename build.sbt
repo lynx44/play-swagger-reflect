@@ -4,6 +4,8 @@ version := "1.0"
 
 scalaVersion in Global := "2.11.8"
 
+organization in Global := "xyz.mattclifton"
+
 resolvers in Global ++= Seq(
   Resolver.jcenterRepo,
   Resolver.sonatypeRepo("snapshots")
